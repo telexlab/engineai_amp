@@ -1,0 +1,9 @@
+.venv/
+*.vscode/
+build/
+*.egg-info/
+*__pycache__/
+*logs/
+*outputs/
+dataset/
+models/
