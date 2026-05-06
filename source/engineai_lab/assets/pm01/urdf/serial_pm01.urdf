@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
+<!-- Use this URDF for robot training instead of the version in the `native_sdk` repository, 
+    due to mismatched inertial properties and collision models. -->
 <robot name="engineai_pm01">
     <link name="LINK_BASE">
         <inertial>
@@ -15,7 +17,13 @@
         <collision>
             <origin xyz="0.02 0 -0.042" rpy="0 0 0"/>
             <geometry>
-                <sphere radius="0.0725"/>
+                <sphere radius="0.075"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="0.02 0 0.01" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.10"/>
             </geometry>
         </collision>
     </link>
@@ -34,7 +42,7 @@
         <collision>
             <origin xyz="0 0.049359 -0.013226" rpy="0 1.57 0"/>
             <geometry>
-                <cylinder radius="0.048" length="0.10"/>
+                <cylinder radius="0.05" length="0.10"/>
             </geometry>
         </collision>
     </link>
@@ -58,9 +66,9 @@
             </geometry>
         </visual>
         <collision>
-            <origin xyz="-0.032 0 -0.07" rpy="0 0 0"/>
+            <origin xyz="-0.032 0 -0.078" rpy="0 0 0"/>
             <geometry>
-                <cylinder radius="0.06" length="0.02"/>
+                <cylinder radius="0.065" length="0.022"/>
             </geometry>
         </collision>
     </link>
@@ -86,10 +94,10 @@
         <collision>
             <origin xyz="0 0 -0.08" rpy="0 0 0"/>
             <geometry>
-                <cylinder radius="0.06" length="0.12"/>
+                <cylinder radius="0.05" length="0.12"/>
             </geometry>
         </collision>
-        <collision>
+        <!-- <collision>
             <origin xyz="-0.026 0.038 -0.236" rpy="1.57 0 0"/>
             <geometry>
                 <cylinder radius="0.05" length="0.02"/>
@@ -100,14 +108,14 @@
             <geometry>
                 <cylinder radius="0.05" length="0.02"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
     <joint name="J02_HIP_YAW_L" type="revolute">
         <origin xyz="-0.03139 -0.0015951 -0.086016" rpy="0 0 0"/>
         <parent link="LINK_HIP_ROLL_L"/>
         <child link="LINK_HIP_YAW_L"/>
         <axis xyz="0 0 1"/>
-        <limit lower="-1.57" upper="4.014" effort="61" velocity="35.2"/>
+        <limit lower="-1.57" upper="4.014" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_KNEE_PITCH_L">
         <inertial>
@@ -124,13 +132,13 @@
         <collision>
             <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <cylinder radius="0.065" length="0.04"/>
+                <cylinder radius="0.065" length="0.08"/>
             </geometry>
         </collision>
         <collision>
             <origin xyz="-0.02 0 -0.20" rpy="0 0.2 0"/>
             <geometry>
-                <box size="0.08 0.06 0.16"/>
+                <box size="0.1 0.08 0.15"/>
             </geometry>
         </collision>
     </link>
@@ -153,19 +161,19 @@
                 <mesh filename="../meshes/LINK_ANKLE_PITCH_L.dae"/>
             </geometry>
         </visual>
-        <collision>
+        <!-- <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="../meshes/LINK_ANKLE_PITCH_L.dae"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
     <joint name="J04_ANKLE_PITCH_L" type="revolute">
         <origin xyz="-0.026756 0.00041994 -0.36305" rpy="0 0 0"/>
         <parent link="LINK_KNEE_PITCH_L"/>
         <child link="LINK_ANKLE_PITCH_L"/>
         <axis xyz="0 1 0"/>
-        <limit lower="-0.6807" upper="0.7243" effort="61" velocity="35.2"/>
+        <limit lower="-0.6807" upper="0.7243" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_ANKLE_ROLL_L">
         <inertial>
@@ -191,26 +199,9 @@
         <parent link="LINK_ANKLE_PITCH_L"/>
         <child link="LINK_ANKLE_ROLL_L"/>
         <axis xyz="1 0 0"/>
-        <limit lower="-0.2618" upper="0.2618" effort="61" velocity="35.2"/>
+        <limit lower="-0.2618" upper="0.2618" effort="52" velocity="35.2"/>
     </joint>
 
-    <link name="LINK_FOOT_L">
-        <inertial>
-            <mass value="1e-3"/>
-            <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
-        </inertial>
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <geometry>
-                <sphere radius="0.02"/>
-            </geometry>
-        </visual>
-    </link>
-    <joint name="J_FIXED_FOOT_L" type="fixed">
-        <origin xyz="0.0170 0.00166 -0.04631" rpy="0 0 0"/>
-        <parent link="LINK_ANKLE_ROLL_L"/>
-        <child link="LINK_FOOT_L"/>
-    </joint>
 
     <link name="LINK_HIP_PITCH_R">
         <inertial>
@@ -227,7 +218,7 @@
         <collision>
             <origin xyz="0 -0.049359 -0.013226" rpy="0 1.57 0"/>
             <geometry>
-                <cylinder radius="0.048" length="0.10"/>
+                <cylinder radius="0.05" length="0.10"/>
             </geometry>
         </collision>
     </link>
@@ -251,9 +242,9 @@
             </geometry>
         </visual>
         <collision>
-            <origin xyz="-0.032 0 -0.07" rpy="0 0 0"/>
+            <origin xyz="-0.032 0 -0.078" rpy="0 0 0"/>
             <geometry>
-                <cylinder radius="0.06" length="0.02"/>
+                <cylinder radius="0.065" length="0.022"/>
             </geometry>
         </collision>
     </link>
@@ -279,10 +270,10 @@
         <collision>
             <origin xyz="0 0 -0.08" rpy="0 0 0"/>
             <geometry>
-                <cylinder radius="0.06" length="0.12"/>
+                <cylinder radius="0.05" length="0.12"/>
             </geometry>
         </collision>
-        <collision>
+        <!-- <collision>
             <origin xyz="-0.026 0.038 -0.236" rpy="1.57 0 0"/>
             <geometry>
                 <cylinder radius="0.05" length="0.02"/>
@@ -293,14 +284,14 @@
             <geometry>
                 <cylinder radius="0.05" length="0.02"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
     <joint name="J08_HIP_YAW_R" type="revolute">
         <origin xyz="-0.03139 0.0015966 -0.086016" rpy="0 0 0"/>
         <parent link="LINK_HIP_ROLL_R"/>
         <child link="LINK_HIP_YAW_R"/>
         <axis xyz="0 0 1"/>
-        <limit lower="-4.014" upper="1.57" effort="61" velocity="35.2"/>
+        <limit lower="-4.014" upper="1.57" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_KNEE_PITCH_R">
         <inertial>
@@ -317,13 +308,13 @@
         <collision>
             <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <cylinder radius="0.065" length="0.04"/>
+                <cylinder radius="0.065" length="0.08"/>
             </geometry>
         </collision>
         <collision>
             <origin xyz="-0.02 0 -0.20" rpy="0 0.2 0"/>
             <geometry>
-                <box size="0.08 0.06 0.16"/>
+                <box size="0.1 0.08 0.15"/>
             </geometry>
         </collision>
     </link>
@@ -346,19 +337,19 @@
                 <mesh filename="../meshes/LINK_ANKLE_PITCH_R.dae"/>
             </geometry>
         </visual>
-        <collision>
+        <!-- <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="../meshes/LINK_ANKLE_PITCH_R.dae"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
     <joint name="J10_ANKLE_PITCH_R" type="revolute">
         <origin xyz="-0.026756 -0.00041994 -0.36305" rpy="0 0 0"/>
         <parent link="LINK_KNEE_PITCH_R"/>
         <child link="LINK_ANKLE_PITCH_R"/>
         <axis xyz="0 1 0"/>
-        <limit lower="-0.6807" upper="0.7243" effort="61" velocity="35.2"/>
+        <limit lower="-0.6807" upper="0.7243" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_ANKLE_ROLL_R">
         <inertial>
@@ -384,7 +375,7 @@
         <parent link="LINK_ANKLE_PITCH_R"/>
         <child link="LINK_ANKLE_ROLL_R"/>
         <axis xyz="1 0 0"/>
-        <limit lower="-0.2618" upper="0.2618" effort="61" velocity="35.2"/>
+        <limit lower="-0.2618" upper="0.2618" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_TORSO_YAW">
         <inertial>
@@ -416,25 +407,7 @@
         <parent link="LINK_BASE"/>
         <child link="LINK_TORSO_YAW"/>
         <axis xyz="0 0 1"/>
-        <limit lower="-4.014" upper="1.57" effort="61" velocity="35.2"/>
-    </joint>
-
-    <link name="LINK_FOOT_R">
-        <inertial>
-            <mass value="1e-3"/>
-            <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
-        </inertial>
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <geometry>
-                <sphere radius="0.02"/>
-            </geometry>
-        </visual>
-    </link>
-    <joint name="J_FIXED_FOOT_R" type="fixed">
-        <origin xyz="0.0170 -0.00166 -0.04631" rpy="0 0 0"/>
-        <parent link="LINK_ANKLE_ROLL_R"/>
-        <child link="LINK_FOOT_R"/>
+        <limit lower="-4.014" upper="1.57" effort="52" velocity="35.2"/>
     </joint>
 
     <link name="LINK_SHOULDER_PITCH_L">
@@ -455,7 +428,7 @@
         <parent link="LINK_TORSO_YAW"/>
         <child link="LINK_SHOULDER_PITCH_L"/>
         <axis xyz="0 0.99803 0.062791"/>
-        <limit lower="-2.9671" upper="2.7925" effort="61" velocity="35.2"/>
+        <limit lower="-2.9671" upper="2.7925" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_SHOULDER_ROLL_L">
         <inertial>
@@ -478,7 +451,7 @@
         <collision>
             <origin xyz="0.04 0.02 -0.068" rpy="0.08 0 0"/>
             <geometry>
-                <cylinder radius="0.04" length="0.016"/>
+                <cylinder radius="0.04" length="0.032"/>
             </geometry>
         </collision>
     </link>
@@ -487,7 +460,7 @@
         <parent link="LINK_SHOULDER_PITCH_L"/>
         <child link="LINK_SHOULDER_ROLL_L"/>
         <axis xyz="1 0 0"/>
-        <limit lower="-0.6108" upper="2.3562" effort="61" velocity="35.2"/>
+        <limit lower="-0.6108" upper="2.3562" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_SHOULDER_YAW_L">
         <inertial>
@@ -519,7 +492,7 @@
         <parent link="LINK_SHOULDER_ROLL_L"/>
         <child link="LINK_SHOULDER_YAW_L"/>
         <axis xyz="0 -0.062803 0.99803"/>
-        <limit lower="-2.618" upper="2.618" effort="61" velocity="35.2"/>
+        <limit lower="-2.618" upper="2.618" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_ELBOW_PITCH_L">
         <inertial>
@@ -545,7 +518,7 @@
         <parent link="LINK_SHOULDER_YAW_L"/>
         <child link="LINK_ELBOW_PITCH_L"/>
         <axis xyz="0.0027243 0.99802 0.062803"/>
-        <limit lower="-2.1948" upper="0.7374" effort="61" velocity="35.2"/>
+        <limit lower="-2.1948" upper="0.7374" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_ELBOW_YAW_L">
         <inertial>
@@ -571,7 +544,7 @@
         <parent link="LINK_ELBOW_PITCH_L"/>
         <child link="LINK_ELBOW_YAW_L"/>
         <axis xyz="-0.21479 -0.061921 0.9747"/>
-        <limit lower="-2.618" upper="2.618" effort="61" velocity="35.2"/>
+        <limit lower="-2.618" upper="2.618" effort="52" velocity="35.2"/>
     </joint>
 
     <link name="LINK_ELBOW_END_L">
@@ -582,12 +555,12 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <sphere radius="0.05"/>
+                <sphere radius="0.04"/>
             </geometry>
         </collision>
     </link>
     <joint name="J_FIXED_ELBOW_END_L" type="fixed">
-        <origin xyz="0.03 -0.02 -0.14" rpy="0 0 0"/>
+        <origin xyz="0.03 -0.02 -0.15" rpy="0 0 0"/>
         <parent link="LINK_ELBOW_YAW_L"/>
         <child link="LINK_ELBOW_END_L"/>
     </joint>
@@ -610,7 +583,7 @@
         <parent link="LINK_TORSO_YAW"/>
         <child link="LINK_SHOULDER_PITCH_R"/>
         <axis xyz="0 0.99803 -0.062791"/>
-        <limit lower="-2.9671" upper="2.7925" effort="61" velocity="35.2"/>
+        <limit lower="-2.9671" upper="2.7925" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_SHOULDER_ROLL_R">
         <inertial>
@@ -633,7 +606,7 @@
         <collision>
             <origin xyz="0.04 -0.02 -0.068" rpy="-0.08 0 0"/>
             <geometry>
-                <cylinder radius="0.04" length="0.016"/>
+                <cylinder radius="0.04" length="0.032"/>
             </geometry>
         </collision>
     </link>
@@ -642,7 +615,7 @@
         <parent link="LINK_SHOULDER_PITCH_R"/>
         <child link="LINK_SHOULDER_ROLL_R"/>
         <axis xyz="1 0 0"/>
-        <limit lower="-2.3562" upper="0.6108" effort="61" velocity="35.2"/>
+        <limit lower="-2.3562" upper="0.6108" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_SHOULDER_YAW_R">
         <inertial>
@@ -674,7 +647,7 @@
         <parent link="LINK_SHOULDER_ROLL_R"/>
         <child link="LINK_SHOULDER_YAW_R"/>
         <axis xyz="0 0.062791 0.99803"/>
-        <limit lower="-2.618" upper="2.618" effort="61" velocity="35.2"/>
+        <limit lower="-2.618" upper="2.618" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_ELBOW_PITCH_R">
         <inertial>
@@ -700,7 +673,7 @@
         <parent link="LINK_SHOULDER_YAW_R"/>
         <child link="LINK_ELBOW_PITCH_R"/>
         <axis xyz="0.0027243 0.99802 -0.06279"/>
-        <limit lower="-2.1948" upper="0.7374" effort="61" velocity="35.2"/>
+        <limit lower="-2.1948" upper="0.7374" effort="52" velocity="35.2"/>
     </joint>
     <link name="LINK_ELBOW_YAW_R">
         <inertial>
@@ -726,7 +699,7 @@
         <parent link="LINK_ELBOW_PITCH_R"/>
         <child link="LINK_ELBOW_YAW_R"/>
         <axis xyz="-0.21479 0.061909 0.9747"/>
-        <limit lower="-2.618" upper="2.618" effort="61" velocity="35.2"/>
+        <limit lower="-2.618" upper="2.618" effort="52" velocity="35.2"/>
     </joint>
 
     <link name="LINK_ELBOW_END_R">
@@ -737,12 +710,12 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <sphere radius="0.05"/>
+                <sphere radius="0.04"/>
             </geometry>
         </collision>
     </link>
     <joint name="J_FIXED_ELBOW_END_R" type="fixed">
-        <origin xyz="0.03 0.02 -0.14" rpy="0 0 0"/>
+        <origin xyz="0.03 0.02 -0.15" rpy="0 0 0"/>
         <parent link="LINK_ELBOW_YAW_R"/>
         <child link="LINK_ELBOW_END_R"/>
     </joint>
@@ -762,7 +735,7 @@
         <collision>
             <origin xyz="0 0 0.1" rpy="0 0 0"/>
             <geometry>
-                <sphere radius="0.1"/>
+                <sphere radius="0.08"/>
             </geometry>
         </collision>
     </link>
@@ -771,6 +744,6 @@
         <parent link="LINK_TORSO_YAW"/>
         <child link="LINK_HEAD_YAW"/>
         <axis xyz="0 0 1"/>
-        <limit lower="-0.6109" upper="0.6109" effort="61" velocity="35.2"/>
+        <limit lower="-0.6109" upper="0.6109" effort="52" velocity="35.2"/>
     </joint>
 </robot>

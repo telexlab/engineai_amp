@@ -2,6 +2,10 @@
 
 **EngineAI Lab** is a python package for training and deploying policies for EngineAI Robots using Isaac Lab and Isaac Sim.
 
+|Training| Sim2Sim |Deploy|
+|--------|--------|--------|
+![training](./docs/training.gif)|![sim2sim](./docs/sim2sim.gif)|<img src="./docs/deploy.gif" height="180"/>
+
 # Structure
 
 ```
